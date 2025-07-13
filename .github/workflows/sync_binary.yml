@@ -1,75 +1,56 @@
 # 🛠️ Sync Binary from Main Repo
-# This workflow runs daily at midnight (UTC) or manually on request.
-# It fetches the latest release from gestion_stock_c,
-# downloads both Windows and Linux binaries into the build/ folder,
-# and commits them into the test repo if there are updates.
+# Runs daily at midnight UTC or manually.
+# Downloads the latest Windows and Linux binaries from gestion_stock_c release
+# Cleans the build/ folder beforehand and prepares them for local testing.
 
 name: 🛠️ Sync Binary from Main Repo
 
 on:
   schedule:
-    - cron: '0 0 * * *'        # ⏰ Runs every day at 00:00 UTC
-  workflow_dispatch:           # 🚀 Manual trigger available in GitHub UI
+    - cron: '0 0 * * *'        # ⏰ Runs every day at midnight UTC
+  workflow_dispatch:           # 🚀 Allows manual run from GitHub UI
 
 jobs:
-  fetch-latest-binary:
-    runs-on: ubuntu-latest     # 💻 Linux runner for broad tool compatibility
+  sync-latest-binaries:
+    runs-on: ubuntu-latest     # 🖥️ Standard Linux runner
 
     steps:
       # 📥 Step 1: Checkout this test repo (Test_Auto_gestion_stock_c)
       - name: Checkout test repo
         uses: actions/checkout@v3
 
-      # 🔍 Step 2: Get latest release tag from the main project repo
+      # 🔍 Step 2: Get the latest release tag from the main gestion_stock_c repo
       - name: Get latest release tag
         id: get_release
         run: |
-          # Call GitHub API to get the latest release info
+          # Fetch the latest release information from GitHub API
           LATEST_TAG=$(curl -s https://api.github.com/repos/amaraoussama94/gestion_stock_c/releases/latest | jq -r .tag_name)
-          echo "Latest tag: $LATEST_TAG"
           
-          # Store the release tag as a GitHub Actions output variable
+          # Print and export the tag
+          echo "Latest tag: $LATEST_TAG"
           echo "TAG=$LATEST_TAG" >> $GITHUB_OUTPUT
 
       # 🧹 Step 3: Clean and prepare the build directory
-      - name: 🔄 Prepare build directory
+      - name: 🔄 Clean build directory
         run: |
-          # Create the folder if missing
+          # Create build/ if missing
           mkdir -p build/
           
-          # Remove all previous binaries to avoid clutter
+          # Remove any previous binaries to avoid confusion
           rm -f build/*
 
-      # 📦 Step 4: Download Linux and Windows binaries from release
-      - name: Download Windows and Linux binaries
+      # 📦 Step 4: Download the latest binaries (Linux & Windows)
+      - name: 📥 Download Windows and Linux binaries
         run: |
           # ✅ Download Linux binary
           curl -L -o build/gestion_stock_linux \
             https://github.com/amaraoussama94/gestion_stock_c/releases/download/${{ steps.get_release.outputs.TAG }}/gestion_stock_linux
           chmod +x build/gestion_stock_linux
 
-          # ✅ Download Windows binary
+          # ✅ Download Windows binary (.exe)
           curl -L -o build/gestion_stock.exe \
             https://github.com/amaraoussama94/gestion_stock_c/releases/download/${{ steps.get_release.outputs.TAG }}/gestion_stock.exe
-
-      # 📤 Step 5: Commit and push the updated binaries to this repo
-      - name: Commit updated binaries (if needed)
-        env:
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 🔐 GitHub token for authentication
-        run: |
-          # 🆔 Configure bot identity
-          git config --global user.email "ci-bot@example.com"
-          git config --global user.name "CI Sync Bot"
-
-          # 🛡️ Authenticate using token to allow push
-          git remote set-url origin https://x-access-token:${TOKEN}@github.com/${{ github.repository }}
-
-          # 🗂️ Stage both binaries for commit
-          git add build/gestion_stock_linux
-          git add build/gestion_stock.exe
-
-          # ✅ Commit if there are updates
-          git commit -m "🤖 Sync latest binaries from gestion_stock_c [${{ steps.get_release.outputs.TAG }}]" || echo "No changes to commit"
-
-          # 🚀 Push updates back to this repo
-          git push
+          
+          # Confirm file sizes for debugging
+          echo "Downloaded binaries:"
+          ls -lh build/
