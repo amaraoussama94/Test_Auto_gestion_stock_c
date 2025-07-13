@@ -50,11 +50,11 @@ Make sure gestion_stock_c binary is compiled and available in build/.
 python3 add_prod_test.py
 python3 smoke_test.py
 
-##🔧 Running Shell-Based Tests (Planned)
+##  🔧 Running Shell-Based Tests (Planned)
 
 bash run_tests.sh
 
-##💡 Test Type Glossary
+##  💡 Test Type Glossary
 
 Functional Test: Verifies correctness of isolated functions or features.
 
@@ -66,7 +66,7 @@ Scenario Test: Simulates real-world multi-step usage.
 
 Regression Test: Guards against recurrence of previously fixed bugs.
 
-#🏗️ Planned Enhancements
+#  🏗️ Planned Enhancements
 
 ✅ Migrate all tests to pure Python for cross-platform support
 
