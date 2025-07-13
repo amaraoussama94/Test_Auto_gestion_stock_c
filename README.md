@@ -88,10 +88,11 @@ Regression Test: Guards against recurrence of previously fixed bugs.
 ## 🤖 Continuous Integration (CI)
 
 ## 📋 Test Report Summary
-
+---
 🚦 smoke_test.py ....................... ✅ PASSED
 🧪 add_prod_test.py .................... ✅ PASSED
 🧩 modify_prod_test.py ................. ⏳ SKIPPED
 🧼 delete_prod_test.py ................. ⏳ SKIPPED
 
 ✔️ Total: 2 Passed / 2 Skipped / 0 Failed
+---
