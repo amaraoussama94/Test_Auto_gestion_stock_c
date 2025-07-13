@@ -1,39 +1,66 @@
-name: 🛠️ Sync Binary from Main Repo
+# 🛠️ Sync Binary from Main Repo
+# This workflow runs daily at midnight (UTC) or manually, 
+# fetches the latest release from gestion_stock_c,
+# downloads both Windows and Linux binaries,
+# and commits them into the test repo if there are updates.
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # ⏰ Runs daily at midnight UTC
-  workflow_dispatch:      # 🚀 Manual trigger support
+    - cron: '0 0 * * *'        # ⏰ Automatically runs at 00:00 UTC every day
+  workflow_dispatch:           # 🚀 Allows manual execution from GitHub UI
 
 jobs:
   fetch-latest-binary:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest     # 💻 Use Linux runner for cross-platform CI
+
     steps:
+      # 📥 Step 1: Check out the test repo (Test_Auto_gestion_stock_c)
       - name: Checkout test repo
         uses: actions/checkout@v3
 
+      # 🔍 Step 2: Get the latest release tag from gestion_stock_c
+      # This is used to build the correct download URLs
       - name: Get latest release tag
         id: get_release
         run: |
+          # Fetch latest release from GitHub API and extract tag name
           LATEST_TAG=$(curl -s https://api.github.com/repos/amaraoussama94/gestion_stock_c/releases/latest | jq -r .tag_name)
           echo "Latest tag: $LATEST_TAG"
           echo "TAG=$LATEST_TAG" >> $GITHUB_OUTPUT
 
-      - name: Download binary from release
+      # 📦 Step 3: Download both Windows (.exe) and Linux binaries
+      - name: Download Windows and Linux binaries
         run: |
+          # Ensure build directory exists
           mkdir -p build/
-          curl -L -o ./build/gestion_stock \
-            https://github.com/amaraoussama94/gestion_stock_c/releases/download/${{ steps.get_release.outputs.TAG }}/gestion_stock
-          chmod +x ./build/gestion_stock
+          
+          # 📥 Linux binary download
+          curl -L -o build/gestion_stock_linux \
+            https://github.com/amaraoussama94/gestion_stock_c/releases/download/${{ steps.get_release.outputs.TAG }}/gestion_stock_linux
+          chmod +x build/gestion_stock_linux
 
-      - name: Commit updated binary (if needed)
+          # 📥 Windows binary download
+          curl -L -o build/gestion_stock.exe \
+            https://github.com/amaraoussama94/gestion_stock_c/releases/download/${{ steps.get_release.outputs.TAG }}/gestion_stock.exe
+
+      # 📤 Step 4: Commit new binaries to test repo if changes are detected
+      - name: Commit updated binaries (if needed)
         env:
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 🛡️ Secure access using GitHub token
         run: |
+          # 🆔 Configure CI bot identity
           git config --global user.email "ci-bot@example.com"
           git config --global user.name "CI Sync Bot"
-          git remote set-url origin https://x-access-token:${TOKEN}@github.com/${{ github.repository }}
-          git add build/gestion_stock
-          git commit -m "🤖 Sync latest binary from gestion_stock_c [${{ steps.get_release.outputs.TAG }}]" || echo "No changes to commit"
-          git push
 
+          # 🔐 Use token-based authentication for push access
+          git remote set-url origin https://x-access-token:${TOKEN}@github.com/${{ github.repository }}
+
+          # 📌 Track both binaries for update
+          git add build/gestion_stock_linux
+          git add build/gestion_stock.exe
+
+          # ✅ Commit if there are changes
+          git commit -m "🤖 Sync latest binaries from gestion_stock_c [${{ steps.get_release.outputs.TAG }}]" || echo "No changes to commit"
+
+          # 🚀 Push changes to repo
+          git push
