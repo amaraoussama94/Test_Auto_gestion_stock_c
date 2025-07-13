@@ -30,6 +30,15 @@ This project includes functional, behavioral, and smoke tests designed to valida
 ```text
 Test_Auto_gestion_stock_c/
 ├── tests/                   # Bash-based functional tests
+├── docs/                        # 📘 Test scenario documentation
+│   ├── add_prod_test.md         # Behavioral test: Add product flow
+│   ├── smoke_test.md            # Smoke test: Launch and exit
+│   ├── modify_prod_test.md      # Functional test: Modify product
+│   ├── delete_prod_test.md      # Functional test: Delete product
+│   ├── list_prod_test.md        # Functional test: List and verify output
+│   ├── full_journey_test.md     # Scenario test: Full user journey
+│   └── regression_bug_test.md   # Regression test description
+├── tests/                       # Python-based executable test logic
 │   ├──add_prod_test.py         # Behavioral test: add product through stdin simulation
 │   ├──smoke_test.py            # Smoke test: launch binary in test mode
 │   ├── test_modification.py
