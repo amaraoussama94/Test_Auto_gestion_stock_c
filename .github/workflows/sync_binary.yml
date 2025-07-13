@@ -27,9 +27,13 @@ jobs:
           chmod +x ./build/gestion_stock
 
       - name: Commit updated binary (if needed)
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.email "ci-bot@example.com"
           git config --global user.name "CI Sync Bot"
+          git remote set-url origin https://x-access-token:${TOKEN}@github.com/${{ github.repository }}
           git add build/gestion_stock
           git commit -m "🤖 Sync latest binary from gestion_stock_c [${{ steps.get_release.outputs.TAG }}]" || echo "No changes to commit"
           git push
+
