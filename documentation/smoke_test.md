@@ -15,7 +15,7 @@ Smoke Test
 
 1. Execute the binary using:
    ```bash
-   python3 smoke_test.py
+   py smoke_test.py
 
 2.  The process runs for up to 5 seconds with no user interaction.
 

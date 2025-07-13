@@ -1,8 +1,18 @@
+"""
+@brief Test script for adding a product in the gestion_stock application
+@details This script simulates user input to add a product without an ID and then 
+exits the application.    
+@note Ensure the gestion_stock application is built and the binary path is correct.
+
+"""
 import subprocess
 import sys
 import os
 
-BINARY_PATH = os.path.join(os.path.dirname(__file__), 'build', 'gestion_stock')
+
+# 🔎 Resolve path to project root, assuming script is in tests/
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+BINARY_PATH = os.path.join(PROJECT_ROOT, 'build', 'gestion_stock.exe')
 
 # Simulate input: choice 1 → nom → quantite → prix → then quit with option 0
 simulated_input = "\n".join([
