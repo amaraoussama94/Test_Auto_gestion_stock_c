@@ -42,7 +42,7 @@ Test_Auto_gestion_stock_c/
 │   └── liste_sample.txt
 ├── run_tests.py             # Central runner with test summary
 └── README.md                # This file
-
+```
 ## Running Python Tests
 
 Make sure gestion_stock_c binary is compiled and available in build/.
