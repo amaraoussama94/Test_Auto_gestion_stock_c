@@ -86,9 +86,9 @@ Regression Test: Guards against recurrence of previously fixed bugs.
 🔄 Expand regression test coverage based on future bug fixes
 
 ## 🤖 Continuous Integration (CI)
-
-## 📋 Test Report Summary
 ---
+## 📋 Test Report Summary
+
 🚦 smoke_test.py ....................... ✅ PASSED
 🧪 add_prod_test.py .................... ✅ PASSED
 🧩 modify_prod_test.py ................. ⏳ SKIPPED
