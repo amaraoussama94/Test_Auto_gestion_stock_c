@@ -48,7 +48,7 @@ def run_listing_test():
             encoding='utf-8'  # ✅ Cross-platform UTF-8 decoding
         )
         stdout, _ = proc.communicate(input=input_sequence, timeout=10)
-        #rint(f"📤 STDOUT:\n{stdout}")
+        print(f"📤 STDOUT:\n{stdout}")
 
         normalized = normalize(stdout)
 
