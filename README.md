@@ -12,11 +12,11 @@ This project includes functional, behavioral, and smoke tests designed to valida
 |------------------------|------------------|----------------------------------------------------------------------------|----------|
 | `add_prod_test.py`     | Behavioral Test  | Simulate user-driven product addition via stdin                            | ✅ Done   |
 | `smoke_test.py`        | Smoke Test       | Launch binary with test flag, confirm clean startup/shutdown               | ✅ Done   |
-| `test_modification.py` | Functional Test  | Ensure product updates are properly persisted without side effects         | ⏳ Planned |
-| `test_suppression.py`  | Functional Test  | Validate product deletion and confirm absence in DB and listing            | ⏳ Planned |
-| `test_liste.py`        | Functional Test  | Compare product listing output with known data                             | ⏳ Planned |
-| `full_journey_test.py` | Scenario Test    | Run complete user flow: add → modify → delete → list → quit                | 📝 Designed |
-| `regression_db_crash.py`| Regression Test | Ensure past DB corruption bug no longer appears when deleting product      | 🧪 To be added |
+| `test_modification.py` | Functional Test  | Ensure product updates are properly persisted without side effects         | ✅ Done  |
+| `test_suppression.py`  | Functional Test  | Validate product deletion and confirm absence in DB and listing            | ✅ Done |
+| `test_liste.py`        | Functional Test  | Compare product listing output with known data                             | ✅ Done |
+| `full_journey_test.py` | Scenario Test    | Run complete user flow: add → modify → delete → list → quit                | ⏳ Planned |
+| `regression_db_crash.py`| Regression Test | Ensure past DB corruption bug no longer appears when deleting product      | ⏳ Planned |
 
 ✅ = Functional  
 ⏳ = In progress  
