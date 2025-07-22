@@ -8,7 +8,7 @@ exits the application.
 import subprocess
 import sys
 import os
-
+from Theem import run_theme_initialization_test
 
 # 🔎 Resolve path to project root, assuming script is in tests/
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
@@ -25,15 +25,20 @@ simulated_input = "\n".join([
 
 def run_scenario_test():
     try:
+        if not run_theme_initialization_test():
+            print("🚫  test failed. Aborting further tests. Can select Theem")
+            sys.exit(1)
         print(f"🧪 Scenario: Ajouter un produit (sans ID) & quitter")
         proc = subprocess.Popen(
             [BINARY_PATH],
             stdin=subprocess.PIPE,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
             text=True
         )
-        proc.communicate(simulated_input, timeout=10)
+        stdout, stderr = proc.communicate(simulated_input, timeout=10)
+        #print(stdout)  # ← observe si le menu s'affiche
+
         if proc.returncode == 0:
             print("✅ Test réussi : produit ajouté et fermeture sans erreur.")
         else:

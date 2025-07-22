@@ -6,6 +6,7 @@
 import subprocess
 import sys
 import os
+from Theem import run_theme_initialization_test
 
 # 🔎 Resolve path to project root, assuming script is in tests/
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
@@ -14,6 +15,9 @@ BINARY_PATH = os.path.join(PROJECT_ROOT, 'build', 'gestion_stock.exe')
 def run_headless_test():
     try:
         print(f"🚦 Smoke test: launching {BINARY_PATH}")
+        if not run_theme_initialization_test():
+            print("🚫 Smoke test failed. Aborting further tests. Can select Theem")
+            sys.exit(1)
         result = subprocess.run(
             [BINARY_PATH, "--test-mode"],
             stdin=subprocess.DEVNULL,
