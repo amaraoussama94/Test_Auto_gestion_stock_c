@@ -19,7 +19,7 @@ def run_headless_test():
             print("🚫 Smoke test failed. Aborting further tests. Can select Theem")
             sys.exit(1)
         result = subprocess.run(
-            [BINARY_PATH, "--test-mode"],
+            [BINARY_PATH, "--test-mode", "--test-mode"],
             stdin=subprocess.DEVNULL,
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,

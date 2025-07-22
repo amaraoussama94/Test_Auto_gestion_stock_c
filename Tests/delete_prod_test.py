@@ -36,7 +36,7 @@ def simulate_deletion(prod_id):
 
     try:
         proc = subprocess.Popen(
-            [BINARY_PATH],
+            [BINARY_PATH, "--test-mode"],
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,

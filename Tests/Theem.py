@@ -23,7 +23,7 @@ def run_theme_initialization_test():
     try:
         print(f"🚦 Launching theme initialization test: {BINARY_PATH}")
         result = subprocess.run(
-            [BINARY_PATH, "--test-mode"],
+            [BINARY_PATH, "--test-mode", "--test-mode"],
             stdin=subprocess.DEVNULL,
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,

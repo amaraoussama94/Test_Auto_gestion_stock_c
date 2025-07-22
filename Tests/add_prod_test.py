@@ -30,7 +30,7 @@ def run_scenario_test():
             sys.exit(1)
         print(f"🧪 Scenario: Ajouter un produit (sans ID) & quitter")
         proc = subprocess.Popen(
-            [BINARY_PATH],
+            [BINARY_PATH, "--test-mode"],
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,

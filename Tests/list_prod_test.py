@@ -40,7 +40,7 @@ def run_listing_test():
 
     try:
         proc = subprocess.Popen(
-            [BINARY_PATH],
+            [BINARY_PATH, "--test-mode"],
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
