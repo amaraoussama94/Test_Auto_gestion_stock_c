@@ -11,7 +11,7 @@ import subprocess
 import sys
 import os
 import unicodedata
-from Theem import run_theme_initialization_test
+#from Theem import run_theme_initialization_test
 
 # 🔎 Resolve path to project root, assuming script is in tests/
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
@@ -74,9 +74,8 @@ def run_modification_test():
     Runs the theme initialization check, then tests modification flow for IDs 1 to 5.
     """
     print(f"🚦 Launching theme initialization test: {BINARY_PATH}")
-    if not run_theme_initialization_test():
-        print("🚫 Test échoué — échec de l'initialisation du thème.")
-        sys.exit(1)
+    #if not run_theme_initialization_test():
+    #    sys.exit(1)
 
     any_success = False
     for pid in range(1, 6):

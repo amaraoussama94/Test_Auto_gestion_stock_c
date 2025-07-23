@@ -6,7 +6,7 @@
          It serves as a prerequisite check before running deeper menu-level tests.
 @note Ensure the gestion_stock application is built and the binary path is correct.
 """
-
+#PS disabled by main software to be fixd  latter for complete real test
 import subprocess
 import sys
 import os

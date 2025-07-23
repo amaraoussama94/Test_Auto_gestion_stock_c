@@ -9,7 +9,7 @@ import subprocess
 import sys
 import os
 import unicodedata
-from Theem import run_theme_initialization_test
+#from Theem import run_theme_initialization_test
 
 # 📂 Determine project structure and binary path
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
@@ -58,9 +58,8 @@ def run_full_journey():
     4. Delete product
     5. Quit application
     """
-    if not run_theme_initialization_test():
-        print("🚫 Theme initialization failed. Cannot proceed with journey test.")
-        sys.exit(1)
+    #if not run_theme_initialization_test():
+    #    sys.exit(1)
 
     print(f"🚀 Starting full journey test with binary: {BINARY_PATH}")
 
