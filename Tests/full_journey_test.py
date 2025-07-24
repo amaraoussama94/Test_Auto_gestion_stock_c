@@ -32,6 +32,26 @@ def log_event(tag, message):
     timestamp = datetime.now().strftime('%H:%M:%S')
     print(f"[{timestamp}] [{tag}] {message}")
 
+def extract_first_product_id(output):
+    """
+    Parses output to find the first listed product ID in range 1–5.
+
+    Parameters:
+        output (str): CLI stdout containing product list.
+
+    Returns:
+        int or None: First product ID if found, else None.
+    """
+    for line in output.splitlines():
+        if line.strip().lower().startswith("id:"):
+            try:
+                product_id = int(line.split(":")[1].split("|")[0].strip())
+                if 1 <= product_id <= 5:
+                    return product_id
+            except:
+                continue
+    return None
+
 def analyze_output(output):
     """
     Evaluates CLI output for expected flow messages and errors.
@@ -91,20 +111,37 @@ def run_full_journey():
 
     log_event("START", f"Launching gestion_stock binary: {BINARY_PATH}")
 
+    # 🧪 Step 1: Pre-list to grab valid ID in range 1–5
+    pre_list_proc = subprocess.Popen(
+        [BINARY_PATH, "--test-mode"],
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        encoding='utf-8'
+    )
+    pre_list_output, _ = pre_list_proc.communicate(input="2\n0\n", timeout=10)
+    product_id = extract_first_product_id(pre_list_output)
+
+    if product_id is None:
+        log_event("FAIL", "❌ No valid product found in range 1–5 to modify/delete.")
+        sys.exit(1)
+
+    log_event("INFO", f"Using dynamic product ID: {product_id}")
+
     input_sequence = "\n".join([
         "1",            # Ajouter produit
         "Clavier",      # Nom
         "25",           # Quantité
         "49.99",        # Prix
         "2",            # Lister produits
-        "",             # Retour au menu
         "4",            # Modifier
-        "1",            # ID produit
+        str(product_id),       # ID produit
         "Clavier RGB",  # Nouveau nom
         "50",           # Nouvelle quantité
         "59.99",        # Nouveau prix
         "3",            # Supprimer
-        "1",            # ID produit
+        str(product_id),       # ID produit
         "o",            # Confirmation suppression
         "0"             # Quitter application
     ]) + "\n"
