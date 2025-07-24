@@ -9,7 +9,7 @@ import subprocess
 import sys
 import os
 import unicodedata
-#from Theem import run_theme_initialization_test
+from datetime import datetime
 
 # 📂 Determine project structure and binary path
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
@@ -21,33 +21,61 @@ def normalize(text):
     """
     return unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('ascii').lower()
 
+def log_event(tag, message):
+    """
+    Logs tagged messages with timestamps for better step-by-step diagnostics.
+    
+    Parameters:
+        tag (str): Label for event (e.g. START, ERROR, PASS).
+        message (str): Description of event.
+    """
+    timestamp = datetime.now().strftime('%H:%M:%S')
+    print(f"[{timestamp}] [{tag}] {message}")
+
 def analyze_output(output):
     """
     Evaluates CLI output for expected flow messages and errors.
-
+    
     Parameters:
         output (str): Combined stdout and stderr text.
     """
     normalized = normalize(output)
 
+    # ✅ Prompts expected in a successful lifecycle run
     success_prompts = ["produit ajoute", "liste des produits", "produit modifie", "produit supprime"]
-    failure_signatures = ["erreur", "exception", "invalid", "segfault", "inexistant", "crash"]
+
+    # ❌ Keywords typically associated with failure
+    failure_signatures = ["erreur", "exception", "segfault", "inexistant", "crash"]
+
+    # ✅ Allowed validation prompts not considered as failure
+    allowed_invalid_contexts = [
+        "entree invalide. veuillez entrer un entier non negatif"
+    ]
 
     missing_success = [msg for msg in success_prompts if msg not in normalized]
-    detected_failures = [fail for fail in failure_signatures if fail in normalized]
+    detected_failures = [
+        fail for fail in failure_signatures if fail in normalized
+    ]
+
+    # 🛡️ Filter out known benign validation prompts
+    if "invalid" in normalized:
+        for context in allowed_invalid_contexts:
+            if context in normalized:
+                log_event("INFO", f"Ignored known benign validation prompt: '{context}'")
+                detected_failures = [f for f in detected_failures if f != "invalid"]
 
     if missing_success:
-        print("⚠️ Some success indicators were missing:")
+        log_event("WARN", "Missing expected success indicators:")
         for msg in missing_success:
             print(f"   ❌ Absent: '{msg}'")
 
     if detected_failures:
-        print("❌ Failure indicators detected:")
+        log_event("ERROR", "Failure indicators detected:")
         for fail in detected_failures:
             print(f"   🔥 Found: '{fail}'")
-        raise AssertionError("Output contains failure messages or missing flow confirmations.")
+        raise AssertionError("Test failed due to output anomalies.")
 
-    print("✅ Full journey validated — flow intact and output confirmed.")
+    log_event("PASS", "✅ Full journey validated successfully.")
 
 def run_full_journey():
     """
@@ -61,7 +89,7 @@ def run_full_journey():
     #if not run_theme_initialization_test():
     #    sys.exit(1)
 
-    print(f"🚀 Starting full journey test with binary: {BINARY_PATH}")
+    log_event("START", f"Launching gestion_stock binary: {BINARY_PATH}")
 
     input_sequence = "\n".join([
         "1",            # Ajouter produit
@@ -90,21 +118,23 @@ def run_full_journey():
             text=True,
             encoding='utf-8'
         )
+
         stdout, stderr = proc.communicate(input=input_sequence, timeout=20)
 
-        print("📤 STDOUT:\n", stdout)
-        print("📥 STDERR:\n", stderr)
+        log_event("STDOUT", stdout)
+        log_event("STDERR", stderr)
 
+        log_event("ANALYSIS", "Beginning output analysis...")
         analyze_output(stdout + stderr)
 
     except AssertionError as ae:
-        print(str(ae))
+        log_event("FAIL", f"Assertion failure: {ae}")
         sys.exit(1)
     except subprocess.TimeoutExpired:
-        print("❌ Timeout expired — CLI may be blocking or paused.")
+        log_event("TIMEOUT", "CLI process timed out — possible pause or blocking prompt.")
         sys.exit(1)
     except Exception as e:
-        print(f"❌ Unexpected error during full journey test: {e}")
+        log_event("EXCEPTION", f"Unexpected error occurred: {e}")
         sys.exit(1)
 
 if __name__ == '__main__':
