@@ -1,0 +1,50 @@
+# Test Suite Workflow Configuration
+# This GitHub Actions workflow runs the test suite on every push to 'main' and on pull requests.
+# It sets up a Python environment, installs dependencies, runs tests, and uploads reports.
+
+name: 🧪 Run Test Suite
+
+# 🕒 Trigger: Scheduled run every day at midnight (UTC)
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs at 00:00 UTC daily        # Trigger when a PR targets 'main'
+  workflow_dispatch:             # Allows manual triggering from GitHub UI
+
+jobs:
+  test-and-report:
+    runs-on: ubuntu-latest       # Uses latest stable Ubuntu VM
+
+    steps:
+      # Step 1: Clone repository
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Python environment
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      # Step 3: Install Python dependencies if available
+      - name: 📦 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt || echo "No requirements.txt found"
+
+      # Step 4: Execute CI orchestrator script
+      - name: 🧪 Run CI Orchestrator
+        run: python3 utils/ci_orchestrator.py
+
+      # Step 5: Upload Markdown test report as artifact
+      - name: 📤 Upload Markdown Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: markdown-report
+          path: reports/*.md
+
+      # Step 6: Upload JSON test report as artifact
+      - name: 📤 Upload JSON Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: json-report
+          path: reports/*.json
