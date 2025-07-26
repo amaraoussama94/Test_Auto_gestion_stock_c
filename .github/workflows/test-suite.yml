@@ -37,14 +37,15 @@ jobs:
 
       # Step 5: Upload Markdown test report as artifact
       - name: 📤 Upload Markdown Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: markdown-report
           path: reports/*.md
-
       # Step 6: Upload JSON test report as artifact
       - name: 📤 Upload JSON Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: json-report
           path: reports/*.json
+
+      
