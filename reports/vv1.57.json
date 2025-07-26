@@ -1,48 +1,42 @@
 {
     "version": "vv1.57",
-    "timestamp": "2025-07-26 09:54:50",
+    "timestamp": "2025-07-26 15:47:19",
     "results": [
         {
-            "script": "add_prod_test.py",
-            "status": "FAILED",
-            "duration": "0.02s",
-            "stdout": "🧪 Scenario: Ajouter un produit (sans ID) & quitter\n❌ Erreur inattendue : [Errno 13] Permission denied: '/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe'\n",
-            "stderr": ""
+            "script": "smoke_test.py",
+            "status": "❌ Failed",
+            "duration": 0.02,
+            "output": "🚦 Smoke test: launching /home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe\n❌ Unexpected error: [Errno 13] Permission denied: '/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe'"
         },
         {
-            "script": "delete_prod_test.py",
-            "status": "PASSED",
-            "duration": "0.02s",
-            "stdout": "\n🧾 Deletion Test Summary:\n  - ID 1: ❌ Invalid or not deleted\n  - ID 2: ❌ Invalid or not deleted\n  - ID 3: ❌ Invalid or not deleted\n  - ID 4: ❌ Invalid or not deleted\n\n✅ Test complete — no deletions occurred; all IDs were invalid.\n",
-            "stderr": ""
+            "script": "add_prod_test.py",
+            "status": "❌ Failed",
+            "duration": 0.02,
+            "output": "🧪 Scenario: Ajouter un produit (sans ID) & quitter\n❌ Erreur inattendue : [Errno 13] Permission denied: '/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe'"
         },
         {
             "script": "list_prod_test.py",
-            "status": "FAILED",
-            "duration": "0.02s",
-            "stdout": "🚦 Launching theme initialization test: /home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe\n❌ Erreur inattendue : [Errno 13] Permission denied: '/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe'\n",
-            "stderr": ""
+            "status": "❌ Failed",
+            "duration": 0.02,
+            "output": "🚦 Launching theme initialization test: /home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe\n❌ Erreur inattendue : [Errno 13] Permission denied: '/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe'"
         },
         {
             "script": "modify_prod_test.py",
-            "status": "PASSED",
-            "duration": "0.02s",
-            "stdout": "🚦 Launching theme initialization test: /home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe\n🔍 Testing modification for ID = 1\n❌ Erreur inattendue : [Errno 13] Permission denied: '/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe'\n🔍 Testing modification for ID = 2\n❌ Erreur inattendue : [Errno 13] Permission denied: '/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe'\n🔍 Testing modification for ID = 3\n❌ Erreur inattendue : [Errno 13] Permission denied: '/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe'\n🔍 Testing modification for ID = 4\n❌ Erreur inattendue : [Errno 13] Permission denied: '/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe'\n🔍 Testing modification for ID = 5\n❌ Erreur inattendue : [Errno 13] Permission denied: '/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe'\n✅ Test passé : Aucun ID valide, comportement attendu.\n",
-            "stderr": ""
+            "status": "✅ Passed",
+            "duration": 0.03,
+            "output": "🚦 Launching theme initialization test: /home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe\n🔍 Testing modification for ID = 1\n❌ Erreur inattendue : [Errno 13] Permission denied: '/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe'\n🔍 Testing modification for ID = 2\n❌ Erreur inattendue : [Errno 13] Permission denied: '/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe'\n🔍 Testing modification for ID = 3\n❌ Erreur inattendue : [Errno 13] Permission denied: '/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe'\n🔍 Testing modification for ID = 4\n❌ Erreur inattendue : [Errno 13] Permission denied: '/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe'\n🔍 Testing modification for ID = 5\n❌ Erreur inattendue : [Errno 13] Permission denied: '/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe'\n✅ Test passé : Aucun ID valide, comportement attendu."
+        },
+        {
+            "script": "delete_prod_test.py",
+            "status": "✅ Passed",
+            "duration": 0.03,
+            "output": "🧾 Deletion Test Summary:\n  - ID 1: ❌ Invalid or not deleted\n  - ID 2: ❌ Invalid or not deleted\n  - ID 3: ❌ Invalid or not deleted\n  - ID 4: ❌ Invalid or not deleted\n\n✅ Test complete — no deletions occurred; all IDs were invalid."
         },
         {
             "script": "regression_bug_test.py",
-            "status": "PASSED",
-            "duration": "0.02s",
-            "stdout": "🐞 Starting regression bug test: /home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe\n❌ Regression test failed due to unexpected error: [Errno 13] Permission denied: '/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe'\n",
-            "stderr": ""
-        },
-        {
-            "script": "smoke_test.py",
-            "status": "FAILED",
-            "duration": "0.02s",
-            "stdout": "🚦 Smoke test: launching /home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe\n❌ Unexpected error: [Errno 13] Permission denied: '/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe'\n",
-            "stderr": ""
+            "status": "✅ Passed",
+            "duration": 0.02,
+            "output": "🐞 Starting regression bug test: /home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe\n❌ Regression test failed due to unexpected error: [Errno 13] Permission denied: '/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe'"
         }
     ]
 }

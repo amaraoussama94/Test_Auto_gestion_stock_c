@@ -1,5 +1,5 @@
 # 🧪 Test Report Summary – Version vv1.57
-**Date**: 2025-07-26 09:54:50
+**Date**: 2025-07-26 15:47:19
 
 ---
 
@@ -7,17 +7,17 @@
 
 | Script | Status | Duration |
 |--------|--------|----------|
-| add_prod_test.py | FAILED | 0.02s |
-| delete_prod_test.py | PASSED | 0.02s |
-| list_prod_test.py | FAILED | 0.02s |
-| modify_prod_test.py | PASSED | 0.02s |
-| regression_bug_test.py | PASSED | 0.02s |
-| smoke_test.py | FAILED | 0.02s |
+| smoke_test.py | ❌ Failed | 0.02 |
+| add_prod_test.py | ❌ Failed | 0.02 |
+| list_prod_test.py | ❌ Failed | 0.02 |
+| modify_prod_test.py | ✅ Passed | 0.03 |
+| delete_prod_test.py | ✅ Passed | 0.03 |
+| regression_bug_test.py | ✅ Passed | 0.02 |
 
 ---
 
 ## 📊 Summary
 - **Total**: 6
-- **Passed**: 3
+- **Passed**: 0
 - **Skipped**: 0
-- **Failed**: 3
+- **Failed**: 0
