@@ -34,6 +34,7 @@ def run_test_script(script_path):
             ["python", script_path],
             capture_output=True,
             text=True,
+            encoding="utf-8",  # 💡 Prevent UnicodeDecodeError on Windows
             timeout=10
         )
         duration = round(time.time() - start, 2)
@@ -43,17 +44,25 @@ def run_test_script(script_path):
             status = "PASSED"
         else:
             status = "FAILED"
+        stdout = result.stdout
+        stderr = result.stderr
     except subprocess.TimeoutExpired:
         status = "TIMEOUT"
         duration = round(time.time() - start, 2)
-        result = None
+        stdout = "Timeout"
+        stderr = ""
+    except Exception as e:
+        status = "ERROR"
+        duration = round(time.time() - start, 2)
+        stdout = ""
+        stderr = str(e)
 
     return {
         "script": os.path.basename(script_path),
         "status": status,
         "duration": f"{duration}s",
-        "stdout": result.stdout if result else "Timeout",
-        "stderr": result.stderr if result else ""
+        "stdout": stdout,
+        "stderr": stderr
     }
 
 def get_repo_root():
@@ -95,3 +104,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
