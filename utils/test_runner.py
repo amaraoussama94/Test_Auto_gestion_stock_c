@@ -17,6 +17,12 @@ Ensure all test scripts follow the naming convention '*.py' and reside in the 'T
 import subprocess
 import os
 import time
+import sys
+#to resolve uknowin package issue 
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+from meta.meta_TEST_REGISTRY import TEST_REGISTRY
+
+from meta.meta_TEST_REGISTRY import TEST_REGISTRY
 
 def run_test_script(script_path):
     """
@@ -83,12 +89,16 @@ def run_all_tests():
     """
     results = []
     test_dir = os.path.join(get_repo_root(), "Tests")
-    
+
     if not os.path.isdir(test_dir):
         raise FileNotFoundError(f"Tests directory not found: {test_dir}")
-    
+
     for script in sorted(os.listdir(test_dir)):
         if script.endswith(".py"):
+            meta = TEST_REGISTRY.get(script, {"run": True, "type": "unknown"})
+            if not meta["run"]:
+                print(f"⏭️ Skipping: {script} [{meta['type']}]")
+                continue
             full_path = os.path.join(test_dir, script)
             result = run_test_script(full_path)
             results.append(result)
@@ -104,4 +114,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

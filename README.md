@@ -108,6 +108,17 @@ Regression Test: Guards against recurrence of previously fixed bugs.
 
 Use this for debugging or focused validation:
 
+---
+
+⚠️ Windows Encoding Notice
+
+If you're running tests on Windows and see garbled output or `UnicodeDecodeError` exceptions, set the Python environment encoding to UTF-8 before executing any scripts:
+
+```powershell
+$env:PYTHONIOENCODING = "utf-8"
+```
+
+
 ```bash
 py  tests/add_prod_test.py
 py tests/test_modification.py
