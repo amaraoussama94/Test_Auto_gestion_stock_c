@@ -52,12 +52,20 @@ jobs:
         with:
           name: json-report
           path: reports/*.json
-
-      # 📝 Step 7: Commit and push generated reports to main
+      # 📤 Step 7: Upload Debug Logs
+      - name: Upload Debug Logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-logs
+          path: build/logs/*.log
+      
+      # 📝 Step 8: Commit and push generated reports to main
       - name: Push Reports to Main
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add build/logs/*.log
+          git diff --cached --quiet || git commit -m "🪵 Add latest debug logs from CI"
           git add reports/*.md reports/*.json
           git diff --cached --quiet || git commit -m "📊 Add generated test reports from CI"
           git push origin main
