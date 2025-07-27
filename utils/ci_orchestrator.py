@@ -26,7 +26,7 @@ def delete_db_after_tests(build_dir="build", db_name="stockt.db"):
     db_path = os.path.join(build_dir, db_name)
     if os.path.exists(db_path):
         os.remove(db_path)
-        print(f"🧹 Deleted temporary DB: {db_path}")
+        print(f" Deleted temporary DB: {db_path}")
 
 def save_reports(results, version, timestamp):
     """Saves results to JSON and Markdown files in `reports/`."""
@@ -55,9 +55,9 @@ def save_reports(results, version, timestamp):
 def run_weekly_test(version, timestamp):
     """Runs weekly validation script and stores its result."""
     script_path = os.path.join(REPO_ROOT, "utils", "run_weekly.py")
-    print("[📆 Weekly Mode] Delegating to run_weekly.py...")
-    result = subprocess.run(["python3", "-m", "utils.run_weekly"], capture_output=True, text=True)
-    
+    print("[Weekly Mode] Delegating to run_weekly.py...")
+    result=subprocess.run([sys.executable, "-m", "utils.run_weekly"], capture_output=True, text=True)
+    print(f"[ Weekly Mode] result it...{result}")
     weekly_result = {
         "script": "run_weekly.py",
         "status": "PASSED" if result.returncode == 0 else "FAILED",
@@ -69,10 +69,10 @@ def run_weekly_test(version, timestamp):
     save_reports([weekly_result], version, timestamp)
 
     if result.returncode != 0:
-        print("❌ Weekly test failed.")
+        print(" Weekly test failed.")
         exit(result.returncode)
     else:
-        print("✅ Weekly test passed.")
+        print(" Weekly test passed.")
 
 def main():
     parser = argparse.ArgumentParser(description="Run CI pipeline or weekly test.")

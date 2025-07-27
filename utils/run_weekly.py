@@ -39,9 +39,9 @@ try:
     status = "success"
 
     # 📢 Echo live output to console
-    print("\n🟩 STDOUT:")
+    print("\n STDOUT:")
     print(result.stdout)
-    print("\n🟥 STDERR:")
+    print("\n STDERR:")
     print(result.stderr)
 
 except subprocess.CalledProcessError as e:
@@ -49,9 +49,9 @@ except subprocess.CalledProcessError as e:
     status = "fail"
 
     # 📢 Echo failure output to console
-    print("\n❌ STDOUT:")
+    print("\n STDOUT:")
     print(e.stdout)
-    print("\n❌ STDERR:")
+    print("\n STDERR:")
     print(e.stderr)
 
 # 📄 Save log output
