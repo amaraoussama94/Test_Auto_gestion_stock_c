@@ -23,8 +23,8 @@ if platform.system() == "Windows":
 else:
     BINARY_PATH = os.path.join(BUILD_DIR, "gestion_stock_linux")
     #change permissions to make it executable ;chmod +x build/gestion_stock_linux
-    st = os.stat(binary_path)
-    os.chmod(binary_path, st.st_mode | stat.S_IEXEC)
+    st = os.stat(BINARY_PATH)
+    os.chmod(BINARY_PATH, st.st_mode | stat.S_IEXEC)
 
 def run_theme_initialization_test():
     """
