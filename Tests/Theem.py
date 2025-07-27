@@ -12,8 +12,15 @@ import sys
 import os
 
 # 🔍 Resolve the path to the project root (assumes this script lives in tests/)
-PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-BINARY_PATH = os.path.join(PROJECT_ROOT, 'build', 'gestion_stock.exe')
+import platform
+
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+BUILD_DIR = os.path.join(PROJECT_ROOT, "build")
+
+if platform.system() == "Windows":
+    BINARY_PATH = os.path.join(BUILD_DIR, "gestion_stock.exe")
+else:
+    BINARY_PATH = os.path.join(BUILD_DIR, "gestion_stock_linux")
 
 def run_theme_initialization_test():
     """
