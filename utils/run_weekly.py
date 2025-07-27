@@ -3,16 +3,15 @@
 @brief Coordinates version tagging, test execution, and report generation.
 @details
 This script serves as the central orchestrator for the CI pipeline. It pulls version
-information from `utils/version.py`, executes tests via `utils/test_runner.py`, and
-formats results into structured reports under `reports/`.
+information from `utils/version.py`, executes regular tests via `utils/test_runner.py`,
+and defers weekly journey logic to `utils/run_weekly.py` for modularity.
 
-Weekly test logic is offloaded to `utils/run_weekly.py` for modularity and clarity.
+Reports are saved under `reports/` (CI) or `weekly_test/` (weekly).
 """
 
 import os
 import json
 import argparse
-import subprocess
 from datetime import datetime
 
 from .version import extract_version_from_git
@@ -21,6 +20,7 @@ from .test_runner import (
     write_report,
     write_log
 )
+from utils.run_weekly import run_weekly_test  # 🧪 Imported for clean orchestration
 
 # === CONFIGURATION ===
 REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -57,17 +57,6 @@ def save_reports(results, version, timestamp):
         failed = sum(1 for r in results if r["status"] == "FAILED")
         f.write("\n---\n\n## 📊 Summary\n")
         f.write(f"- **Total**: {total}\n- **Passed**: {passed}\n- **Skipped**: {skipped}\n- **Failed**: {failed}\n")
-
-def run_weekly_test():
-    """Delegates to run_weekly.py as subprocess."""
-    script_path = os.path.join(REPO_ROOT, "utils", "run_weekly.py")
-    print("[📆 Weekly Mode] Delegating to run_weekly.py...")
-    result = subprocess.run(["python3", "-m", "utils.run_weekly"], capture_output=True, text=True)
-    print(result.stdout)
-    if result.returncode != 0:
-        print("❌ Weekly test failed.")
-    else:
-        print("✅ Weekly test passed.")
 
 def main():
     parser = argparse.ArgumentParser(description="Run CI pipeline or weekly test.")
