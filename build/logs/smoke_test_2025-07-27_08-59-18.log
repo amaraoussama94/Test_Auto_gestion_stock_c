@@ -1,0 +1,13 @@
+[2025-07-27_08-59-18] Running: smoke_test.py
+📁 Working Directory: /home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build
+📦 DB File: stockt.db | Exists: False
+
+📤 STDOUT:
+Smoke test: launching /home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe
+ Unexpected error: [Errno 13] Permission denied: '/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe'
+
+❌ STDERR:
+
+
+🔚 Exit Code: 1
+🔎 Output Match: ✗ None Found
