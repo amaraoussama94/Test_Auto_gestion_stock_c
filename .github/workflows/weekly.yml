@@ -1,0 +1,50 @@
+# 🌐 Weekly Full Journey Test Workflow
+# This workflow runs the full_journey_test.py script every Monday at 00:00 UTC.
+# It verifies the CLI's complete flow, logs results into weekly_test/, and supports manual dispatch.
+
+name: 🌐 Weekly Full Journey Test
+
+on:
+  # 🗓️ Scheduled trigger: every Monday at midnight UTC
+  schedule:
+    - cron: '0 0 * * 1'
+  
+  # 🔘 Manual trigger from GitHub UI
+  workflow_dispatch:
+
+jobs:
+  weekly-journey:
+    name: 🚀 Weekly CLI Journey Validation
+    runs-on: ubuntu-latest
+
+    steps:
+      # 📥 Step 1: Checkout source code from the repository
+      - name: 🔄 Checkout repository
+        uses: actions/checkout@v4
+
+      # 🐍 Step 2: Set up Python environment
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      # 📦 Step 3: Install Python dependencies
+      - name: 📦 Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      # 🧪 Step 4: Execute weekly test script
+      - name: 🧪 Run weekly full_journey_test
+        run: |
+          echo "📆 Running weekly test pipeline..."
+          python3 -m utils.run_weekly
+
+      # 📤 Step 5: Upload test artifacts (logs + report) for inspection
+      - name: 📤 Upload weekly artifacts
+        if: always()  # Ensures logs are available even if test fails
+        uses: actions/upload-artifact@v3
+        with:
+          name: weekly-test-report
+          path: |
+            weekly_test/*.json
+            weekly_test/*.txt
