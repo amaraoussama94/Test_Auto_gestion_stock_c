@@ -42,7 +42,7 @@ jobs:
       # 📤 Step 5: Upload test artifacts (logs + report) for inspection
       - name: 📤 Upload weekly artifacts
         if: always()  # Ensures logs are available even if test fails
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4  # 🔄 Updated to v4 to fix deprecated version
         with:
           name: weekly-test-report
           path: |
