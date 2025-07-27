@@ -29,9 +29,11 @@ jobs:
           python-version: '3.11'
 
       # 📦 Step 3: Install Python dependencies
-      - name: 📦 Install dependencies
+      # ⚙️ Step 3: Initialize CLI runtime environment
+      - name: ⚙️ Prepare CLI runtime (if applicable)
         run: |
-          pip install -r requirements.txt
+          echo "🔧 No requirements.txt — CLI handles dependencies internally"
+
 
       # 🧪 Step 4: Execute weekly test script
       - name: 🧪 Run weekly full_journey_test
