@@ -19,8 +19,10 @@ REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 # 🗂️ Create weekly_test folder at root level
 WEEKLY_DIR = os.path.join(REPO_ROOT, "weekly_test")
 os.makedirs(WEEKLY_DIR, exist_ok=True)
-#get test folder path
+
+# 📁 Get test folder path
 test_dir = os.path.join(REPO_ROOT, "Tests")
+
 # 🕒 Timestamp for report files
 timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%d_%H-%M-%S")
 log_path = os.path.join(WEEKLY_DIR, f"report_{timestamp}.txt")
@@ -35,9 +37,22 @@ try:
         check=True
     )
     status = "success"
+
+    # 📢 Echo live output to console
+    print("\n🟩 STDOUT:")
+    print(result.stdout)
+    print("\n🟥 STDERR:")
+    print(result.stderr)
+
 except subprocess.CalledProcessError as e:
     result = e
     status = "fail"
+
+    # 📢 Echo failure output to console
+    print("\n❌ STDOUT:")
+    print(e.stdout)
+    print("\n❌ STDERR:")
+    print(e.stderr)
 
 # 📄 Save log output
 with open(log_path, "w", encoding="utf-8") as log_file:

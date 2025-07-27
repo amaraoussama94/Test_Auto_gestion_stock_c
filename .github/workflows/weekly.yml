@@ -39,7 +39,7 @@ jobs:
       - name: 🧪 Run weekly full_journey_test
         run: |
           echo "📆 Running weekly test pipeline..."
-          python3 -m utils.run_weekly
+          run: python3 -m utils.ci_orchestrator --weekly
 
       # 📤 Step 5: Upload test artifacts (logs + report) for inspection
       - name: 📤 Upload weekly artifacts
