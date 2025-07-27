@@ -1,75 +1,62 @@
 """
-@file ci_orchestrator.py
-@brief Coordinates version tagging, test execution, and report generation.
+@file utils/run_weekly.py
+@brief Runs the full journey test suite and generates structured reports.
 @details
-This script serves as the central orchestrator for the CI pipeline. It pulls version
-information from `utils/version.py`, executes regular tests via `utils/test_runner.py`,
-and defers weekly journey logic to `utils/run_weekly.py` for modularity.
-
-Reports are saved under `reports/` (CI) or `weekly_test/` (weekly).
+This script is executed by the CI orchestrator to validate weekly application health.
+It invokes the full journey tests using CLI arguments, captures output, logs results,
+and generates structured reports in both TXT and JSON formats for traceability.
 """
 
 import os
+import sys
 import json
-import argparse
-from datetime import datetime
+import datetime
+import subprocess
 
-from .version import extract_version_from_git
-from .test_runner import (
-    run_all_tests,
-    write_report,
-    write_log
-)
-from utils.run_weekly import run_weekly_test  # 🧪 Imported for clean orchestration
-
-# === CONFIGURATION ===
+# 📍 Resolve repo root (parent of utils/)
 REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-REPORT_DIR = os.path.join(REPO_ROOT, "reports")
-os.makedirs(REPORT_DIR, exist_ok=True)
 
-def delete_db_after_tests(build_dir="build", db_name="stockt.db"):
-    """Deletes the temporary database file after tests."""
-    db_path = os.path.join(build_dir, db_name)
-    if os.path.exists(db_path):
-        os.remove(db_path)
-        print(f"🧹 Deleted temporary DB: {db_path}")
+# 🗂️ Create weekly_test folder at root level
+WEEKLY_DIR = os.path.join(REPO_ROOT, "weekly_test")
+os.makedirs(WEEKLY_DIR, exist_ok=True)
+#get test folder path
+test_dir = os.path.join(REPO_ROOT, "Tests")
+# 🕒 Timestamp for report files
+timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%d_%H-%M-%S")
+log_path = os.path.join(WEEKLY_DIR, f"report_{timestamp}.txt")
+json_path = os.path.join(WEEKLY_DIR, f"result_{timestamp}.json")
 
-def save_reports(results, version, timestamp):
-    """Saves results to JSON and Markdown files in `reports/`."""
-    json_path = os.path.join(REPORT_DIR, f"{version}.json")
-    with open(json_path, "w", encoding="utf-8") as f:
-        json.dump({
-            "version": version,
-            "timestamp": timestamp,
-            "results": results
-        }, f, indent=4, ensure_ascii=False)
+# 🧪 Run the weekly test command (customize if needed)
+try:
+    result = subprocess.run(
+        ["python", os.path.join(test_dir, "full_journey_test.py")],
+        capture_output=True,
+        text=True,
+        check=True
+    )
+    status = "success"
+except subprocess.CalledProcessError as e:
+    result = e
+    status = "fail"
 
-    md_path = os.path.join(REPORT_DIR, f"{version}.md")
-    with open(md_path, "w", encoding="utf-8") as f:
-        f.write(f"# 🧪 Test Report Summary – Version {version}\n")
-        f.write(f"**Date**: {timestamp}\n\n---\n\n## ✅ Test Results\n\n")
-        f.write("| Script | Status | Duration |\n|--------|--------|----------|\n")
-        for r in results:
-            f.write(f"| {r['script']} | {r['status']} | {r['duration']} |\n")
-        total = len(results)
-        passed = sum(1 for r in results if r["status"] == "PASSED")
-        skipped = sum(1 for r in results if r["status"] == "SKIPPED")
-        failed = sum(1 for r in results if r["status"] == "FAILED")
-        f.write("\n---\n\n## 📊 Summary\n")
-        f.write(f"- **Total**: {total}\n- **Passed**: {passed}\n- **Skipped**: {skipped}\n- **Failed**: {failed}\n")
+# 📄 Save log output
+with open(log_path, "w", encoding="utf-8") as log_file:
+    log_file.write(result.stdout)
+    log_file.write("\n--- STDERR ---\n")
+    log_file.write(result.stderr)
 
-def main():
-    parser = argparse.ArgumentParser(description="Run CI pipeline or weekly test.")
-    parser.add_argument("--weekly", action="store_true", help="Run full_journey_test weekly mode")
-    args = parser.parse_args()
+# 📊 Save result metadata as JSON
+metadata = {
+    "status": status,
+    "timestamp": timestamp,
+    "command": result.args,
+    "returncode": result.returncode,
+    "stdout_summary": result.stdout[:300],  # Optional: truncate for overview
+    "stderr_summary": result.stderr[:300]
+}
 
-    if args.weekly:
-        run_weekly_test()
-    else:
-        version = extract_version_from_git()
-        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        results = run_all_tests()
-        save_reports(results, version, timestamp)
+with open(json_path, "w", encoding="utf-8") as json_file:
+    json.dump(metadata, json_file, indent=2)
 
-if __name__ == "__main__":
-    main()
+# 🔔 Exit code propagation (for CI feedback)
+sys.exit(result.returncode)
