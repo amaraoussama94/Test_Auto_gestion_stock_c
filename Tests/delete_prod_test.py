@@ -68,15 +68,15 @@ def run_deletion_test():
     for pid in range(1, 5):
         results[pid] = simulate_deletion(pid)
 
-    print("\n🧾 Deletion Test Summary:")
+    print("\n Deletion Test Summary:")
     for pid, success in results.items():
-        status = "✅ Deleted" if success else "❌ Invalid or not deleted"
+        status = " Deleted" if success else " Invalid or not deleted"
         print(f"  - ID {pid}: {status}")
 
     if any(results.values()):
-        print("\n🎉 Test complete — at least one product was successfully deleted.")
+        print("\n Test complete — at least one product was successfully deleted.")
     else:
-        print("\n✅ Test complete — no deletions occurred; all IDs were invalid.")
+        print("\n Test complete — no deletions occurred; all IDs were invalid.")
 
 if __name__ == '__main__':
     run_deletion_test()

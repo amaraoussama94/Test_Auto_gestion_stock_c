@@ -27,9 +27,9 @@ def run_scenario_test():
     try:
 
         #if not run_theme_initialization_test():
-        #    print("🚫 Smoke test failed. Aborting further tests. Can select Theem")
+        #    print(" Smoke test failed. Aborting further tests. Can select Theem")
         #    sys.exit(1)
-        print(f"🧪 Scenario: Ajouter un produit (sans ID) & quitter")
+        print(f" Scenario: Ajouter un produit (sans ID) & quitter")
         proc = subprocess.Popen(
             [BINARY_PATH, "--test-mode"],
             stdin=subprocess.PIPE,
@@ -41,15 +41,15 @@ def run_scenario_test():
         print(stdout)  # ← observe si le menu s'affiche
 
         if proc.returncode == 0:
-            print("✅ Test réussi : produit ajouté et fermeture sans erreur.")
+            print(" Test réussi : produit ajouté et fermeture sans erreur.")
         else:
-            print(f"⚠️ Code de sortie inattendu : {proc.returncode}")
+            print(f" Code de sortie inattendu : {proc.returncode}")
             sys.exit(proc.returncode)
     except subprocess.TimeoutExpired:
-        print("❌ Échec : délai dépassé — vérifiez les pauses ou les lectures bloquantes.")
+        print(" Échec : délai dépassé — vérifiez les pauses ou les lectures bloquantes.")
         sys.exit(1)
     except Exception as e:
-        print(f"❌ Erreur inattendue : {e}")
+        print(f" Erreur inattendue : {e}")
         sys.exit(1)
 
 if __name__ == '__main__':

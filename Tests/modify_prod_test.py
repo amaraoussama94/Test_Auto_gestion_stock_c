@@ -28,7 +28,7 @@ def simulate_modification(prod_id):
     Simulates an attempt to modify a product with the given ID.
     If the product exists, modifies its name, quantity, and price.
     """
-    print(f"🔍 Testing modification for ID = {prod_id}")
+    print(f" Testing modification for ID = {prod_id}")
     input_sequence = "\n".join([
         "4",            # Menu: Modifier un produit
         str(prod_id),   # ID du produit
@@ -49,31 +49,31 @@ def simulate_modification(prod_id):
         stdout, _ = proc.communicate(input=input_sequence, timeout=10)
 
         # 🧪 Print full stdout for debug purposes
-        #print(f"📤 STDOUT for ID {prod_id}:\n{stdout}")
+        #print(f" STDOUT for ID {prod_id}:\n{stdout}")
 
         # 🔍 Normalize and search output
         norm_out = normalize(stdout)
         if "inexistant" in norm_out or "invalide" in norm_out:
-            print(f"❌ ID {prod_id} invalide — produit inexistant.")
+            print(f" ID {prod_id} invalide — produit inexistant.")
             return False
         elif "modifie" in norm_out or "modification" in norm_out:
-            print(f"✅ Modification réussie pour l’ID {prod_id}.")
+            print(f" Modification réussie pour l’ID {prod_id}.")
             return True
         else:
-            print(f"⚠️ Comportement inattendu pour l’ID {prod_id}.")
+            print(f" Comportement inattendu pour l’ID {prod_id}.")
             return False
     except subprocess.TimeoutExpired:
-        print("❌ Échec : délai dépassé — entrée bloquante ou pause console non ignorée.")
+        print(" Échec : délai dépassé — entrée bloquante ou pause console non ignorée.")
         return False
     except Exception as e:
-        print(f"❌ Erreur inattendue : {e}")
+        print(f" Erreur inattendue : {e}")
         return False
 
 def run_modification_test():
     """
     Runs the theme initialization check, then tests modification flow for IDs 1 to 5.
     """
-    print(f"🚦 Launching theme initialization test: {BINARY_PATH}")
+    #print(f"🚦 Launching theme initialization test: {BINARY_PATH}")
     #if not run_theme_initialization_test():
     #    sys.exit(1)
 
@@ -85,9 +85,9 @@ def run_modification_test():
             break  # Une réussite suffit pour valider la modification
 
     if not any_success:
-        print("✅ Test passé : Aucun ID valide, comportement attendu.")
+        print(" Test passé : Aucun ID valide, comportement attendu.")
     else:
-        print("✅ Test passé : Modification acceptée sur un ID valide.")
+        print(" Test passé : Modification acceptée sur un ID valide.")
 
 if __name__ == '__main__':
     run_modification_test()

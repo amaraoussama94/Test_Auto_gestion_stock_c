@@ -27,7 +27,7 @@ def run_listing_test():
     and checks for presence of product field keywords.
     Prints which fields are missing if validation fails.
     """
-    print(f"🚦 Launching theme initialization test: {BINARY_PATH}")
+    #print(f"🚦 Launching theme initialization test: {BINARY_PATH}")
     #if not run_theme_initialization_test():
     #    sys.exit(1)
     # Simulate listing products and quitting
@@ -46,7 +46,7 @@ def run_listing_test():
             encoding='utf-8'  # ✅ Cross-platform UTF-8 decoding
         )
         stdout, _ = proc.communicate(input=input_sequence, timeout=10)
-        print(f"📤 STDOUT:\n{stdout}")
+        print(f" STDOUT:\n{stdout}")
 
         normalized = normalize(stdout)
 
@@ -55,21 +55,21 @@ def run_listing_test():
 
         if "liste des produits" in normalized:
             if not missing_fields:
-                print("✅ Test réussi : tous les champs du produit sont présents dans la sortie.")
+                print(" Test réussi : tous les champs du produit sont présents dans la sortie.")
             else:
-                print("⚠️ Test partiellement réussi : les champs suivants sont manquants ou mal encodés →")
+                print(" Test partiellement réussi : les champs suivants sont manquants ou mal encodés →")
                 for field in missing_fields:
-                    print(f"   ❌ Champ absent : {field}")
+                    print(f"    Champ absent : {field}")
                 sys.exit(1)
         else:
-            print("❌ Aucun produit trouvé — pensez à en ajouter avant de relancer ce test.")
+            print(" Aucun produit trouvé — pensez à en ajouter avant de relancer ce test.")
             sys.exit(1)
 
     except subprocess.TimeoutExpired:
-        print("❌ Délai dépassé — vérifiez les blocages d'entrée ou pauses inattendues.")
+        print(" Délai dépassé — vérifiez les blocages d'entrée ou pauses inattendues.")
         sys.exit(1)
     except Exception as e:
-        print(f"❌ Erreur inattendue : {e}")
+        print(f" Erreur inattendue : {e}")
         sys.exit(1)
 
 if __name__ == '__main__':

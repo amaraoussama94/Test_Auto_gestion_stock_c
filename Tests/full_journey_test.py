@@ -87,15 +87,15 @@ def analyze_output(output):
     if missing_success:
         log_event("WARN", "Missing expected success indicators:")
         for msg in missing_success:
-            print(f"   ❌ Absent: '{msg}'")
+            print(f"    Absent: '{msg}'")
 
     if detected_failures:
         log_event("ERROR", "Failure indicators detected:")
         for fail in detected_failures:
-            print(f"   🔥 Found: '{fail}'")
+            print(f"    Found: '{fail}'")
         raise AssertionError("Test failed due to output anomalies.")
 
-    log_event("PASS", "✅ Full journey validated successfully.")
+    log_event("PASS", " Full journey validated successfully.")
 
 def run_full_journey():
     """
@@ -124,7 +124,7 @@ def run_full_journey():
     product_id = extract_first_product_id(pre_list_output)
 
     if product_id is None:
-        log_event("FAIL", "❌ No valid product found in range 1–5 to modify/delete.")
+        log_event("FAIL", " No valid product found in range 1–5 to modify/delete.")
         sys.exit(1)
 
     log_event("INFO", f"Using dynamic product ID: {product_id}")

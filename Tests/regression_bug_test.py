@@ -34,20 +34,20 @@ def analyze_output(output):
 
     for signature in known_error_signatures:
         if signature.lower() in output.lower():
-            raise AssertionError(f"❌ Regression detected: {signature}")
+            raise AssertionError(f" Regression detected: {signature}")
 
     # Optional: Validate known-good behavior
     if "Produit:" in output:
-        print("✅ Product listing appears in output — logic intact.")
+        print("Product listing appears in output — logic intact.")
     else:
-        print("⚠️ Expected listing output not found — verify edge case handling.")
+        print("Expected listing output not found — verify edge case handling.")
 
 def run_regression_test():
     """
     Runs CLI-based regression scenario targeting known fragile flows.
     Inputs simulate problematic sequences from past bug reports.
     """
-    print(f"🐞 Starting regression bug test: {BINARY_PATH}")
+    print(f" Starting regression bug test: {BINARY_PATH}")
 
     input_sequence = "\n".join([
         "2",     # Simulates listing products — common trigger area
@@ -69,19 +69,19 @@ def run_regression_test():
         # 📥 Communicate inputs and receive program output
         stdout, stderr = proc.communicate(input=input_sequence, timeout=10)
 
-        print(f"📤 STDOUT:\n{stdout}")
-        print(f"📥 STDERR:\n{stderr}")
+        print(f" STDOUT:\n{stdout}")
+        print(f"STDERR:\n{stderr}")
 
         # 🔍 Analyze combined output for known regression signs
         analyze_output(stdout + stderr)
-        print("🧪 Regression test passed. No anomalies detected.")
+        print("Regression test passed. No anomalies detected.")
 
     except AssertionError as ae:
         # ❌ Logic triggered a known bug signature
         print(str(ae))
     except Exception as e:
         # 🔥 Unforeseen crash or environment issue
-        print(f"❌ Regression test failed due to unexpected error: {e}")
+        print(f" Regression test failed due to unexpected error: {e}")
 
 if __name__ == "__main__":
     run_regression_test()

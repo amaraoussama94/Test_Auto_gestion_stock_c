@@ -14,9 +14,9 @@ BINARY_PATH = os.path.join(PROJECT_ROOT, 'build', 'gestion_stock.exe')
 
 def run_headless_test():
     try:
-        print(f"🚦 Smoke test: launching {BINARY_PATH}")
+        print(f" Smoke test: launching {BINARY_PATH}")
         #if not run_theme_initialization_test():
-        #    print("🚫 Smoke test failed. Aborting further tests. Can select Theem")
+        #    print(" Smoke test failed. Aborting further tests. Can select Theem")
         #    sys.exit(1)
         result = subprocess.run(
             [BINARY_PATH, "--test-smoke"],
@@ -26,15 +26,15 @@ def run_headless_test():
             timeout=5
         )
         if result.returncode == 0:
-            print("✅ Binary opened and exited cleanly.")
+            print(" Binary opened and exited cleanly.")
         else:
-            print(f"⚠️ Binary exited with return code {result.returncode}")
+            print(f" Binary exited with return code {result.returncode}")
             sys.exit(result.returncode)
     except subprocess.TimeoutExpired:
-        print("❌ Binary launch timed out — possible hang or input prompt.")
+        print(" Binary launch timed out — possible hang or input prompt.")
         sys.exit(1)
     except Exception as e:
-        print(f"❌ Unexpected error: {e}")
+        print(f" Unexpected error: {e}")
         sys.exit(1)
 
 if __name__ == '__main__':
