@@ -32,6 +32,20 @@ os.makedirs(REPORT_DIR, exist_ok=True)
 version = extract_version_from_git()
 timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
+
+def delete_db_after_tests(build_dir="build", db_name="stockt.db"):
+    """Deletes the temporary database file after tests.
+
+    Args:
+        build_dir (str): Directory where the database is located.
+        db_name (str): Name of the database file to delete.
+    """
+    db_path = os.path.join(build_dir, db_name)
+    if os.path.exists(db_path):
+        os.remove(db_path)
+        print(f"🧹 Deleted temporary DB: {db_path}")
+
+
 def save_reports(results):
     """
     Saves test results to JSON and Markdown files.
