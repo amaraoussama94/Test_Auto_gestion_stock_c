@@ -1,6 +1,6 @@
 {
     "version": "vv1.57",
-    "timestamp": "2025-07-26 15:47:19",
+    "timestamp": "2025-07-27 01:53:45",
     "results": [
         {
             "script": "smoke_test.py",
@@ -23,13 +23,13 @@
         {
             "script": "modify_prod_test.py",
             "status": "✅ Passed",
-            "duration": 0.03,
+            "duration": 0.02,
             "output": "🚦 Launching theme initialization test: /home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe\n🔍 Testing modification for ID = 1\n❌ Erreur inattendue : [Errno 13] Permission denied: '/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe'\n🔍 Testing modification for ID = 2\n❌ Erreur inattendue : [Errno 13] Permission denied: '/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe'\n🔍 Testing modification for ID = 3\n❌ Erreur inattendue : [Errno 13] Permission denied: '/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe'\n🔍 Testing modification for ID = 4\n❌ Erreur inattendue : [Errno 13] Permission denied: '/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe'\n🔍 Testing modification for ID = 5\n❌ Erreur inattendue : [Errno 13] Permission denied: '/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock.exe'\n✅ Test passé : Aucun ID valide, comportement attendu."
         },
         {
             "script": "delete_prod_test.py",
             "status": "✅ Passed",
-            "duration": 0.03,
+            "duration": 0.02,
             "output": "🧾 Deletion Test Summary:\n  - ID 1: ❌ Invalid or not deleted\n  - ID 2: ❌ Invalid or not deleted\n  - ID 3: ❌ Invalid or not deleted\n  - ID 4: ❌ Invalid or not deleted\n\n✅ Test complete — no deletions occurred; all IDs were invalid."
         },
         {
