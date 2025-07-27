@@ -25,7 +25,7 @@ test_dir = os.path.join(REPO_ROOT, "Tests")
 
 # 🕒 Timestamp for report files
 timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%d_%H-%M-%S")
-log_path = os.path.join(WEEKLY_DIR, f"report_{timestamp}.txt")
+log_path = os.path.join(WEEKLY_DIR, f"report_{timestamp}.log")
 json_path = os.path.join(WEEKLY_DIR, f"result_{timestamp}.json")
 
 # 🧪 Run the weekly test command (customize if needed)
