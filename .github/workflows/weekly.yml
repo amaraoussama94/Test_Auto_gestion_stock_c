@@ -48,3 +48,13 @@ jobs:
           path: |
             weekly_test/*.json
             weekly_test/*.txt
+      # 📝 Step 6: Commit and push latest logs and reports
+      - name: Push Reports and Logs to Main
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add weekly_test/*.log weekly_test/*.json
+          git diff --cached --quiet || git commit -m "🧪 CI: Push latest weekly logs and reports"
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
