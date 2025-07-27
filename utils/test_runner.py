@@ -28,14 +28,14 @@ def get_repo_root():
     """
     return os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
-def run_test_script(script_path, db_filename="stockt.db", expected_output="Produit ajouté"):
+def run_test_script(script_path, db_filename="stockt.db", expected_output=None):
     """
     Executes a single test script, validates output, and logs diagnostic info.
 
     Args:
         script_path (str): Full path to the test script.
         db_filename (str): Name of the expected database file.
-        expected_output (str): Message expected to confirm success.
+        expected_output (str or list): Message(s) expected to confirm success.
 
     Returns:
         dict: Result summary including script name, status, duration, output path, and errors.
@@ -55,7 +55,7 @@ def run_test_script(script_path, db_filename="stockt.db", expected_output="Produ
             cwd=build_dir,
             capture_output=True,
             text=True,
-            encoding="utf-8",  # 👈 force decoding
+            encoding="utf-8",
             timeout=300
         )
 
@@ -63,6 +63,15 @@ def run_test_script(script_path, db_filename="stockt.db", expected_output="Produ
         stderr = completed.stderr.strip()
         db_path = os.path.join(build_dir, db_filename)
         db_exists = os.path.exists(db_path)
+
+        # Output match logic
+        matched_msg = None
+        if isinstance(expected_output, list):
+            matched_msg = next((msg for msg in expected_output if msg in stdout), None)
+        elif isinstance(expected_output, str):
+            matched_msg = expected_output if expected_output in stdout else None
+
+        output_match = matched_msg is not None
 
         # Diagnostic logging
         with open(log_path, "w", encoding="utf-8") as log_file:
@@ -72,10 +81,10 @@ def run_test_script(script_path, db_filename="stockt.db", expected_output="Produ
             log_file.write("📤 STDOUT:\n" + stdout + "\n\n")
             log_file.write("❌ STDERR:\n" + stderr + "\n\n")
             log_file.write(f"🔚 Exit Code: {completed.returncode}\n")
-            log_file.write(f"🔎 Output Check: {'✓ Found' if expected_output in stdout else '✗ Not Found'}\n")
+            log_file.write(f"🔎 Output Match: {matched_msg if matched_msg else '✗ None Found'}\n")
 
         # Status evaluation
-        if completed.returncode == 0 and expected_output in stdout and db_exists:
+        if completed.returncode == 0 and output_match and db_exists:
             status = "✅ Passed"
         else:
             status = "❌ Failed"
