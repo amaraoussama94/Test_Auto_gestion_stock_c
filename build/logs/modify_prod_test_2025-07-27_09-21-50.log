@@ -1,0 +1,22 @@
+[2025-07-27_09-21-50] Running: modify_prod_test.py
+📁 Working Directory: /home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build
+📦 DB File: stockt.db | Exists: False
+
+📤 STDOUT:
+Testing modification for ID = 1
+ Erreur inattendue : [Errno 13] Permission denied: '/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock_linux'
+ Testing modification for ID = 2
+ Erreur inattendue : [Errno 13] Permission denied: '/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock_linux'
+ Testing modification for ID = 3
+ Erreur inattendue : [Errno 13] Permission denied: '/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock_linux'
+ Testing modification for ID = 4
+ Erreur inattendue : [Errno 13] Permission denied: '/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock_linux'
+ Testing modification for ID = 5
+ Erreur inattendue : [Errno 13] Permission denied: '/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock_linux'
+ Test passé : Aucun ID valide, comportement attendu.
+
+❌ STDERR:
+
+
+🔚 Exit Code: 0
+🔎 Output Match: ✗ None Found
