@@ -28,18 +28,16 @@ jobs:
         with:
           python-version: '3.11'
 
-      # 📦 Step 3: Install Python dependencies
       # ⚙️ Step 3: Initialize CLI runtime environment
       - name: ⚙️ Prepare CLI runtime (if applicable)
         run: |
           echo "🔧 No requirements.txt — CLI handles dependencies internally"
 
-
       # 🧪 Step 4: Execute weekly test script
       - name: 🧪 Run weekly full_journey_test
         run: |
-          echo " Running weekly test pipeline..."
-          run: python3 -m utils.ci_orchestrator --weekly
+          echo "📆 Running weekly test pipeline..."
+          python3 -m utils.ci_orchestrator --weekly
 
       # 📤 Step 5: Upload test artifacts (logs + report) for inspection
       - name: 📤 Upload weekly artifacts
