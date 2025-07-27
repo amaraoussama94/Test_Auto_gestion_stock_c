@@ -13,6 +13,7 @@ import unicodedata
 
 # Project and binary path setup
 import platform
+import stat
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 BUILD_DIR = os.path.join(PROJECT_ROOT, "build")
@@ -21,6 +22,9 @@ if platform.system() == "Windows":
     BINARY_PATH = os.path.join(BUILD_DIR, "gestion_stock.exe")
 else:
     BINARY_PATH = os.path.join(BUILD_DIR, "gestion_stock_linux")
+    #change permissions to make it executable ;chmod +x build/gestion_stock_linux
+    st = os.stat(binary_path)
+    os.chmod(binary_path, st.st_mode | stat.S_IEXEC)
 
 def normalize(text):
     """
