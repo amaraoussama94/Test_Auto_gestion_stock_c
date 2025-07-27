@@ -35,39 +35,44 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt || echo "No requirements.txt found"
 
-      # 🔧 Step 4: Execute CI orchestrator script
+      # 🧹 Step 4: Clean old logs and reports
+      - name: Clean old logs and reports
+        run: |
+          rm -f build/logs/*.log || true
+          rm -f reports/*.md reports/*.json || true
+
+      # 🔧 Step 5: Execute CI orchestrator script
       - name: Run CI Orchestrator
         run: python3 -m utils.ci_orchestrator
 
-      # 📤 Step 5: Upload Markdown test report
+      # 📤 Step 6: Upload Markdown test report
       - name: Upload Markdown Report
         uses: actions/upload-artifact@v4
         with:
           name: markdown-report
           path: reports/*.md
 
-      # 📤 Step 6: Upload JSON test report
+      # 📤 Step 7: Upload JSON test report
       - name: Upload JSON Report
         uses: actions/upload-artifact@v4
         with:
           name: json-report
           path: reports/*.json
-      # 📤 Step 7: Upload Debug Logs
+
+      # 📤 Step 8: Upload Debug Logs
       - name: Upload Debug Logs
         uses: actions/upload-artifact@v4
         with:
           name: debug-logs
           path: build/logs/*.log
-      
-      # 📝 Step 8: Commit and push generated reports to main
-      - name: Push Reports to Main
+
+      # 📝 Step 9: Commit and push latest logs and reports
+      - name: Push Reports and Logs to Main
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add build/logs/*.log
-          git diff --cached --quiet || git commit -m "🪵 Add latest debug logs from CI"
-          git add reports/*.md reports/*.json
-          git diff --cached --quiet || git commit -m "📊 Add generated test reports from CI"
+          git add build/logs/*.log reports/*.md reports/*.json
+          git diff --cached --quiet || git commit -m "🧪 CI: Push latest logs and reports"
           git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
