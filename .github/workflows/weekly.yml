@@ -38,7 +38,7 @@ jobs:
       # 🧪 Step 4: Execute weekly test script
       - name: 🧪 Run weekly full_journey_test
         run: |
-          echo "📆 Running weekly test pipeline..."
+          echo " Running weekly test pipeline..."
           run: python3 -m utils.ci_orchestrator --weekly
 
       # 📤 Step 5: Upload test artifacts (logs + report) for inspection
