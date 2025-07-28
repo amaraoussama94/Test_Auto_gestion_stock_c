@@ -1,0 +1,13 @@
+[2025-07-28_01-51-48] Running: smoke_test.py
+📁 Working Directory: /home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build
+📦 DB File: stockt.db | Exists: True
+
+📤 STDOUT:
+Smoke test: launching /home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock_linux
+ Binary opened and exited cleanly.
+
+❌ STDERR:
+
+
+🔚 Exit Code: 0
+🔎 Output Match: Binary opened and exited cleanly
