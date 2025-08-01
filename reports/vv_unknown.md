@@ -1,5 +1,5 @@
 # 🧪 Test Report Summary – Version vv_unknown
-**Date**: 2025-07-31_01-47-23
+**Date**: 2025-08-01_01-57-24
 
 ---
 
@@ -8,10 +8,10 @@
 | Script | Status | Duration |
 |--------|--------|----------|
 | smoke_test.py | ✅ Passed | 0.03 |
-| add_prod_test.py | ✅ Passed | 0.03 |
+| add_prod_test.py | ✅ Passed | 0.04 |
 | list_prod_test.py | ✅ Passed | 0.04 |
 | modify_prod_test.py | ✅ Passed | 0.03 |
-| delete_prod_test.py | ✅ Passed | 0.06 |
+| delete_prod_test.py | ✅ Passed | 0.05 |
 | regression_bug_test.py | ❌ Failed | 0.03 |
 
 ---
