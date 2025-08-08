@@ -1,0 +1,18 @@
+[2025-08-08_01-48-34] Running: delete_prod_test.py
+📁 Working Directory: /home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build
+📦 DB File: stockt.db | Exists: True
+
+📤 STDOUT:
+Deletion Test Summary:
+  - ID 1:  Deleted
+  - ID 2:  Invalid or not deleted
+  - ID 3:  Invalid or not deleted
+  - ID 4:  Invalid or not deleted
+
+ Test complete — at least one product was successfully deleted.
+
+❌ STDERR:
+
+
+🔚 Exit Code: 0
+🔎 Output Match: Deleted
