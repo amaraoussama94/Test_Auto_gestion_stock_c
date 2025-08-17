@@ -1,0 +1,30 @@
+[2025-08-17_01-46-17] Running: add_prod_test.py
+📁 Working Directory: /home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build
+📦 DB File: stockt.db | Exists: True
+
+📤 STDOUT:
+Scenario: Ajouter un produit (sans ID) & quitter
+
+=== Gestion de Stock ===
+1. Ajouter un produit
+2. Lister les produits
+3. Supprimer un produit
+4. Modifier un produit
+0. Quitter
+Choix : Nom : Quantité : Prix : Produit ajouté avec succès.
+
+=== Gestion de Stock ===
+1. Ajouter un produit
+2. Lister les produits
+3. Supprimer un produit
+4. Modifier un produit
+0. Quitter
+Choix : Au revoir !
+[0m
+ Test réussi : produit ajouté et fermeture sans erreur.
+
+❌ STDERR:
+
+
+🔚 Exit Code: 0
+🔎 Output Match: Produit ajouté avec succès
