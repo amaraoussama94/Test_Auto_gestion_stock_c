@@ -1,0 +1,14 @@
+[2025-08-19_01-27-37] Running: modify_prod_test.py
+📁 Working Directory: /home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build
+📦 DB File: stockt.db | Exists: True
+
+📤 STDOUT:
+Testing modification for ID = 1
+ Modification réussie pour l’ID 1.
+ Test passé : Modification acceptée sur un ID valide.
+
+❌ STDERR:
+
+
+🔚 Exit Code: 0
+🔎 Output Match:  Modification réussie pour 
