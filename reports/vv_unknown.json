@@ -1,42 +1,42 @@
 {
     "version": "vv_unknown",
-    "timestamp": "2025-08-29_01-23-35",
+    "timestamp": "2025-08-30_01-19-32",
     "results": [
         {
             "script": "smoke_test.py",
             "status": "✅ Passed",
             "duration": 0.03,
-            "log": "/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/logs/smoke_test_2025-08-29_01-23-35.log"
+            "log": "/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/logs/smoke_test_2025-08-30_01-19-32.log"
         },
         {
             "script": "add_prod_test.py",
             "status": "✅ Passed",
-            "duration": 0.04,
-            "log": "/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/logs/add_prod_test_2025-08-29_01-23-35.log"
+            "duration": 0.03,
+            "log": "/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/logs/add_prod_test_2025-08-30_01-19-32.log"
         },
         {
             "script": "list_prod_test.py",
             "status": "✅ Passed",
-            "duration": 0.08,
-            "log": "/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/logs/list_prod_test_2025-08-29_01-23-35.log"
+            "duration": 0.06,
+            "log": "/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/logs/list_prod_test_2025-08-30_01-19-32.log"
         },
         {
             "script": "modify_prod_test.py",
             "status": "✅ Passed",
             "duration": 0.04,
-            "log": "/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/logs/modify_prod_test_2025-08-29_01-23-35.log"
+            "log": "/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/logs/modify_prod_test_2025-08-30_01-19-32.log"
         },
         {
             "script": "delete_prod_test.py",
             "status": "✅ Passed",
             "duration": 0.05,
-            "log": "/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/logs/delete_prod_test_2025-08-29_01-23-35.log"
+            "log": "/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/logs/delete_prod_test_2025-08-30_01-19-32.log"
         },
         {
             "script": "regression_bug_test.py",
             "status": "❌ Failed",
             "duration": 0.03,
-            "log": "/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/logs/regression_bug_test_2025-08-29_01-23-35.log"
+            "log": "/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/logs/regression_bug_test_2025-08-30_01-19-32.log"
         }
     ]
 }
