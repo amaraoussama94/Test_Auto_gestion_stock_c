@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "timestamp": "2025-09-29_01-41-26",
+  "command": [
+    "python",
+    "/home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/Tests/full_journey_test.py"
+  ],
+  "returncode": 0,
+  "stdout_summary": "[01:41:26] [START] Launching gestion_stock binary: /home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock_linux (Add & List)\n[01:41:26] [STDOUT] \n=== Gestion de Stock ===\n1. Ajouter un produit\n2. Lister les produits\n3. Supprimer un produit\n4. Modifier un produit\n0.",
+  "stderr_summary": ""
+}
