@@ -1,0 +1,77 @@
+[02:07:32] [START] Launching gestion_stock binary: /home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock_linux (Add & List)
+[02:07:32] [STDOUT] 
+=== Gestion de Stock ===
+1. Ajouter un produit
+2. Lister les produits
+3. Supprimer un produit
+4. Modifier un produit
+0. Quitter
+Choix : Nom : Quantité : Prix : Produit ajouté avec succès.
+
+=== Gestion de Stock ===
+1. Ajouter un produit
+2. Lister les produits
+3. Supprimer un produit
+4. Modifier un produit
+0. Quitter
+Choix : Liste des produits :
+ID: 1 | Nom: Clavier | Quantité: 25 | Prix: 49.99
+
+=== Gestion de Stock ===
+1. Ajouter un produit
+2. Lister les produits
+3. Supprimer un produit
+4. Modifier un produit
+0. Quitter
+Choix : Au revoir !
+[0m
+[02:07:32] [STDERR] TERM environment variable not set.
+TERM environment variable not set.
+TERM environment variable not set.
+TERM environment variable not set.
+TERM environment variable not set.
+TERM environment variable not set.
+
+[02:07:32] [INFO] Using dynamic product ID: 1
+[02:07:32] [START] Launching gestion_stock binary: /home/runner/work/Test_Auto_gestion_stock_c/Test_Auto_gestion_stock_c/build/gestion_stock_linux (Modify & Delete)
+[02:07:32] [STDOUT] 
+=== Gestion de Stock ===
+1. Ajouter un produit
+2. Lister les produits
+3. Supprimer un produit
+4. Modifier un produit
+0. Quitter
+Choix : ID du produit à modifier : Nouveau nom : Nouvelle quantité : Nouveau prix : Produit modifié avec succès.
+
+=== Gestion de Stock ===
+1. Ajouter un produit
+2. Lister les produits
+3. Supprimer un produit
+4. Modifier un produit
+0. Quitter
+Choix : ID du produit à supprimer : Êtes-vous sûr de vouloir supprimer ce produit ? (o/n) : Produit supprimé.
+
+=== Gestion de Stock ===
+1. Ajouter un produit
+2. Lister les produits
+3. Supprimer un produit
+4. Modifier un produit
+0. Quitter
+Choix : Entrée invalide. Veuillez entrer un entier non négatif : Au revoir !
+[0m
+[02:07:32] [STDERR] TERM environment variable not set.
+TERM environment variable not set.
+TERM environment variable not set.
+TERM environment variable not set.
+TERM environment variable not set.
+TERM environment variable not set.
+
+[02:07:32] [ANALYSIS] Beginning output analysis...
+[02:07:32] [CONFIRM] Detected: 'produit ajoute'
+[02:07:32] [CONFIRM] Detected: 'liste des produits'
+[02:07:32] [CONFIRM] Detected: 'produit modifie'
+[02:07:32] [CONFIRM] Detected: 'produit supprime'
+[02:07:32] [INFO] Ignored benign validation prompt: 'entree invalide. veuillez entrer un entier non negatif'
+[02:07:32] [PASS]  Full journey validated successfully.
+
+--- STDERR ---
